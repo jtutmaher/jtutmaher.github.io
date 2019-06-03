@@ -1,2 +1,2 @@
 # jtutmaher.github.io
-Blog for technology and scientific related things
+Blog for technology and scientific related ideas
