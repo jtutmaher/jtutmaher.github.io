@@ -6,7 +6,7 @@ highlighter:      pygments
 permalink:        pretty
 
 # Setup
-title:            [science.fit(data)]
+title:            'science.fit'
 tagline:          'Data is the Commodity'
 description:      'Thoughts and ideas of a passionate data scientist.'
 url:              https://jtutmaher.github.io
