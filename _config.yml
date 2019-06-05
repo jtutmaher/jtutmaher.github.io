@@ -1,51 +1,26 @@
-# Build settings
-permalink: /blog/:year/:title/
-markdown: kramdown
-highlighter: pygments
-plugins: [jekyll-paginate-v2]
+# Dependencies
+markdown:         redcarpet
+highlighter:      pygments
 
-pagination:
-  enabled: true
-  per_page: 3
-  permalink: "/page/:num/"
+# Permalinks
+permalink:        pretty
+relative_permalinks: true
 
-comments: true
+# Setup
+title:            Hyde
+tagline:          'A Jekyll theme'
+description:      'A brazen two-column <a href="http://jekyllrb.com" target="_blank">Jekyll</a> theme that pairs a prominent sidebar with uncomplicated content. Made by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.'
+url:              http://hyde.getpoole.com
+baseurl:          /
 
-source: source
-destination: _site
-sass:
-  sass_dir: _sass
-  style: compressed # expanded
-
-# SEO settings
-title: end2end
-description: "A free Jekyll theme for download"
-keywords: "Jekyll, theme, free, download, SEO, blog, web"
-url: http://nandomoreira.me
-baseurl: "/end2end"
-
-google_analytics: UA-52446115-1
-repo: http://github.com/nandomoreirame/end2end
-disqus_shortname: "nandothemes"
-disqus_site_shortname: "nandothemes"
-
-# Author settings
 author:
-  name: Jacob Tutmaher
-  job: Applied Scientist
-  bio: "I genuinely enjoy science and technology. I hope this blog inspires future scientists and engineers."
-  thumb: /images/author.jpg
-  url: https://jtutmaher.github.io/
-  github: https://github.com/jtutmaher
-  linkedin: https://linkedin.com/in/jacobtutmaher
+  name:           'Mark Otto'
+  url:            https://twitter.com/mdo
 
-# navbar pages
-navbar:
-  - slug: about
-    title: About
-  - slug: icons
-    title: Icons
-  - slug: blog
-    title: Blog
+paginate:         5
 
-exclude: ["config.rb", "src", "Gemfile", "Gemfile.lock", "package.json","README.md", "Rakefile"]
+# Custom vars
+version:          2.1.0
+
+github:
+  repo:           https://github.com/poole/hyde
