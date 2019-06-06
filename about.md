@@ -6,7 +6,7 @@ sidebar_link: true
 
 
 
-<img src="_screenshots/headshot.png" width="400" height="500" />
+<img src="https://raw.githubusercontent.com/jtutmaher/jtutmaher.github.io/master/_screenshots/headshot.png" width="400" height="500" />
 
 I started my career as a power engineer, speacializing in renewable energy development and economic forecasting. Since that time, I have worked as a lead data scientist and software engineer, specializing in developing Bayesian models and downstream statistical metrics at scale. Currently I work as an Applied Scientist at Amazon, where I contribute to supply chain optimization and demand forecasts.
 
