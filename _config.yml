@@ -3,7 +3,7 @@ markdown:         kramdown
 highlighter:      rouge
 
 # Setup
-title:            
+title:            -
 tagline:          'The Power of Uncertainty'
 description:      'A blog for data, statistics, and everything inbetween.'
 url:              https://jtutmaher.github.io
