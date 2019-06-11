@@ -45,7 +45,7 @@ kramdown:
   show_warnings: false
   syntax_highlighter:   coderay
   coderay_line_numbers: inline
-  math_engine:       katex		# or use  mathjax 
+  math_engine:       mathjax		# or use  mathjax 
   math_engine_opts:
     preview:         true
     preview_as_code: true
