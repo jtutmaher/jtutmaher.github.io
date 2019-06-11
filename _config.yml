@@ -1,7 +1,8 @@
 # Dependencies
 markdown:         kramdown
 highlighter:      rouge
-math_engine:	  mathjax
+kramdown:
+	math_engine: mathjax
 
 # Setup
 title:            ''
