@@ -1,4 +1,4 @@
-\---
+---
 
 layout: post
 
@@ -6,9 +6,7 @@ title: An Introduction to Basic Statistics
 
 excerpt_separator:  <!--more-->
 
-\---
-
-# An Introduction to Basic Statistics
+---
 
 It's amazing how powerful basic statistics can be in the context of Machine Learning. The best data scientists leverage basic statistical methods to implement clever feature engineering and feature selection. Despite the AI evangelists insistence, nothing can replace careful data processing and handling. 
 
@@ -22,11 +20,11 @@ This blog isn't about data augmentation. Rather, it's an effort to return to bas
 
 Most people are familiar with normal distributions. They underline many physical systems, such as human height, weight, and even body temperature. This is most impressively formalized in the Central Limit Theorem, which states that some systems, with an arbitrary number of independent random variables, approach a normal distribution under addition - *even if the underlying variables aren't normally distributed themselves*. **[2]** This might seem like I'm harping on an edge case, but it's important to remember that A LOT of useful properties are additive - like the mean of a set of numbers. 
 
+<img src="https://raw.githubusercontent.com/jtutmaher/jtutmaher.github.io/master/_screenshots/normal.png" align="center" height=400 />
 
 
-![Normal Distribution](../_screenshots/normal.png)
 
-
+$$ f_{pdf} = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{\frac{(x-\mu)^2}{2\sigma^2}}.$$
 
 
 
