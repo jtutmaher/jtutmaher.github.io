@@ -6,6 +6,8 @@ title: An Introduction to Basic Statistics
 
 excerpt_separator:  <!--more-->
 
+comments: true
+
 ---
 
 It's amazing how powerful basic statistics can be in the context of Machine Learning. The best data scientists leverage basic statistical methods to implement clever feature engineering and feature selection. Despite the AI evangelists insistence, nothing can replace careful data processing and handling. 
@@ -38,10 +40,7 @@ p + theme_classic()
 
 ![Normal](https://raw.githubusercontent.com/jtutmaher/jtutmaher.github.io/master/_screenshots/normal.png?raw=true)
 
-$ f_{pdf} = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{\frac{(x-\mu)^2}{2\sigma^2}}.$
-
-
-
+$$f_{pdf} = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{\frac{(x-\mu)^2}{2\sigma^2}}$$
 
 
 **[1]** [https://snow.dog/blog/data-augmentation-for-small-datasets](https://snow.dog/blog/data-augmentation-for-small-datasets)
