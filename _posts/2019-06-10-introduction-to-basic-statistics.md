@@ -1,6 +1,18 @@
+\---
+
+layout: post
+
+title: An Introduction to Basic Statistics
+
+excerpt_separator:  <!--more-->
+
+\---
+
 # An Introduction to Basic Statistics
 
 It's amazing how powerful basic statistics can be in the context of Machine Learning. The best data scientists leverage basic statistical methods to implement clever feature engineering and feature selection. Despite the AI evangelists insistence, nothing can replace careful data processing and handling. 
+
+<!--more-->
 
 I think that advances in deep learning have given the industry the *perception* that data understanding is obsolete, but this is far from the truth. For example, you can't implement good data augmentation for a CNN without understanding useful image representations of your dataset. Does a 180 degree rotation introduce error to the network, or is it a valid data augmentation technique? Well, this rotation might work well for images of cats, but could fail miserably for images of numbers. **[1]**
 
