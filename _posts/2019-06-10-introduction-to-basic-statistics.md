@@ -34,17 +34,9 @@ p <- qplot(x=xs, y=ys, data=data, geom='line',alpha=I(.5),
 p + theme_classic()
 ```
 
-
-
-<div container><img src="https://raw.githubusercontent.com/jtutmaher/jtutmaher.github.io/master/_screenshots/normal.png" height=400 /></div>
-
-
-
-​			
+​		
 
 $$ f_{pdf} = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{\frac{(x-\mu)^2}{2\sigma^2}}.$$
-
-
 
 
 
