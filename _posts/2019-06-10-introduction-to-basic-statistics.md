@@ -18,7 +18,23 @@ This blog isn't about data augmentation. Rather, it's an effort to return to bas
 
 ## Normal Distributions
 
-Most people are familiar with normal distributions. They underline many physical systems, such as human height, weight, and even body temperature. This is most impressively formalized in the Central Limit Theorem, which states that some systems, with an arbitrary number of independent random variables, approach a normal distribution under addition - *even if the underlying variables aren't normally distributed themselves*. **[2]** This might seem like I'm harping on an edge case, but it's important to remember that A LOT of useful properties are additive - like the mean of a set of numbers. 
+Most people are familiar with normal distributions. They underline many physical systems, such as human height, weight, and even body temperature. This is most impressively formalized in the Central Limit Theorem, which states that some systems, with an arbitrary number of independent random variables, approach a normal distribution under addition - *even if the underlying variables aren't normally distributed themselves*. **[2]** This might seem like I'm harping on an edge case, but it's important to remember that A LOT of useful properties are additive - like the mean of a series... 
+
+```R
+library(ggplot2)
+library(data.table)
+
+# CONSTRUCT DF
+data <- data.frame(xs = seq(-5, 5, 0.1), ys = dnorm(seq(-5, 5, 0.1), mean = 0, sd = 1, log = FALSE))
+
+# PLOT IT
+p <- qplot(x=xs, y=ys, data=data, geom='line',alpha=I(.5), 
+   main="Sample Normal Distribution", xlab="Index Variable", 
+   ylab="PDF")
+p + theme_classic()
+```
+
+
 
 <img src="https://raw.githubusercontent.com/jtutmaher/jtutmaher.github.io/master/_screenshots/normal.png" align="center" height=400 />
 
