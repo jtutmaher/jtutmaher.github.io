@@ -1,8 +1,6 @@
 # Dependencies
 markdown:         kramdown
 highlighter:      rouge
-kramdown:
-	math_engine: mathjax
 
 # Setup
 title:            ''
@@ -35,3 +33,19 @@ sidebar_home_link:  true
                                 # page. If you change your paginate_path,
                                 # set this to the root of the paginate_path
                                 # to enable a separate blog link.
+
+kramdown:
+  auto_ids:      true
+  entity_output: as_char
+  toc_levels:    1..6
+  smart_quotes:  lsquo,rsquo,ldquo,rdquo
+  input:         GFM
+  hard_wrap:     false
+  footnote_nr:   1
+  show_warnings: false
+  syntax_highlighter:   coderay
+  coderay_line_numbers: inline
+  math_engine:       katex		# or use  mathjax 
+  math_engine_opts:
+    preview:         true
+    preview_as_code: true
