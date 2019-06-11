@@ -40,8 +40,6 @@ p + theme_classic()
 
 
 
-$$ f_{pdf} = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{\frac{(x-\mu)^2}{2\sigma^2}}.$$
-
 
 
 **[1]** [https://snow.dog/blog/data-augmentation-for-small-datasets](https://snow.dog/blog/data-augmentation-for-small-datasets)
