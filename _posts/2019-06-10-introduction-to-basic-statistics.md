@@ -2,7 +2,7 @@
 
 layout: post
 
-title: An Introduction to Basic Statistics
+title: An Introduction to Statistics for Machine Learning
 
 excerpt_separator:  <!--more-->
 
@@ -10,13 +10,13 @@ comments: true
 
 ---
 
-It's amazing how powerful basic statistics can be in the context of Machine Learning. The best data scientists leverage basic statistical methods to implement clever feature engineering and feature selection. Despite the AI evangelists insistence, nothing can replace careful data processing and handling. 
+It's amazing how powerful basic statistics can be in the context of Machine Learning. The best data scientists leverage basic statistical methods to implement clever feature engineering and feature selection. Despite the insistence by AI evangelists, nothing can replace careful data processing and handling. 
 
 <!--more-->
 
-I think that advances in deep learning have given the industry the *perception* that data understanding is obsolete, but this is far from the truth. For example, you can't implement good data augmentation for a CNN without understanding useful image representations of your dataset. Does a 180 degree rotation introduce error to the network, or is it a valid data augmentation technique? Well, this rotation might work well for images of cats, but could fail miserably for images of numbers. **[1]**
+I think that advances in deep learning have given the industry the *perception* that data understanding is obsolete, but this is far from the truth. For example, you can't implement good data augmentation for a CNN without understanding useful representations of an image dataset. Does a 180 degree rotation introduce error to the network, or is it a valid data augmentation technique? Well, this rotation might work for images of cats, but could fail for images of numbers. **[1]**
 
-This blog isn't about data augmentation. Rather, it's an effort to return to basics and review some of the most common statistical methods. Below are summaries and examples of some of the most basic statistical definitions, such as skew, kurtosis, power, and sampling techniques. It also leverages some excellent libraries in R, which are always worth reviewing.
+This blog isn't about data augmentation. Rather, it's a review some common statistical methods in Machine Learning that I've found useful. The sections below summarize these ideas, such as skew, kurtosis, power, and cluster sampling. It also leverages a few great libraries in R, which are always worth reviewing.
 
 ## Normal Distributions
 
@@ -41,6 +41,14 @@ p + theme_classic()
 ![Normal](https://raw.githubusercontent.com/jtutmaher/jtutmaher.github.io/master/_screenshots/normal.png?raw=true)
 
 $$f_{pdf} = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{\frac{(x-\mu)^2}{2\sigma^2}}$$
+
+It's important to remember that normal distributions are parameterized by two factors, the mean $\mu$ and the standard deviation $\sigma$. Typically normal distributions have zero skewness and kurtosis; however, certain extensions of normal distributions, such as skew normal distributions, violate this behavior. These distributions are discussed more completely below. 
+
+## Skew and Kurtosis
+
+Skewness quantifies the asymmetry of a distribution. It is often, but not always, the case that a right-skew distribution has a mean greater than the median, and a left-skew distribution has a mean less than the median. This statement can break down for multimodal or discrete distributions. Regardless, it is always the case that a unimodal distribution with zero skew has mean=median=mode. 
+
+An important type of skew distribution is the skew normal distribution. 
 
 
 **[1]** [https://snow.dog/blog/data-augmentation-for-small-datasets](https://snow.dog/blog/data-augmentation-for-small-datasets)
