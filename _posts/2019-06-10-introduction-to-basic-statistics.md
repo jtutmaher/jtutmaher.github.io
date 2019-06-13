@@ -20,37 +20,80 @@ This blog isn't about data augmentation. Rather, it's a review some common stati
 
 ## Normal Distributions
 
-Most people are familiar with normal distributions. They underline many physical systems, such as human height, weight, and even body temperature. This is most impressively formalized in the Central Limit Theorem, which states that some systems, with an arbitrary number of independent random variables, approach a normal distribution under addition - *even if the underlying variables aren't normally distributed themselves*. **[2]** This might seem like I'm harping on an edge case, but it's important to remember that A LOT of useful properties are additive - like the mean of a series... 
+Most people are familiar with normal distributions. They underlie many physical systems, such as human height, weight, and even body temperature. This is most impressive formalization is the Central Limit Theorem, which states that certain systems, with an arbitrary number of independent random variables, approach a normal distribution under addition in the limit of large N - *even if the underlying variables aren't normally distributed themselves*. **[2]** This might seem like an edge case, but it's important to remember that A LOT of useful properties are additive - like the mean of a series... 
 
 ```R
 library(ggplot2)
-library(data.table)
+require(gridExtra)
 
 # CONSTRUCT DF
 data <- data.frame(xs = seq(-5, 5, 0.1), ys = dnorm(seq(-5, 5, 0.1), mean = 0, sd = 1, log = FALSE))
 
-# PLOT IT
-p <- qplot(x=xs, y=ys, data=data, geom='line',alpha=I(.5), 
-   main="Sample Normal Distribution", xlab="Index Variable", 
-   ylab="PDF")
-p + theme_classic()
+# COMPUTE THE MOMENTS
+data$first.moment = data$xs*data$ys
+data$second.moment = data$xs**2*data$ys
+data$third.moment = data$xs**3*data$ys
+data$fourth.moment = data$xs**4*data$ys
+
+
+# GENERATE PLOTS
+# normal distribution
+p1 <- ggplot() + ggtitle('Normal PDF') +
+    geom_line(data = data, aes(x = xs, y = ys), alpha=0.5, lwd=1.0) +
+    xlab('Index Variable') +
+    ylab('PDF') + 
+    theme_classic()
+
+# normal moment plots
+p2 <- ggplot() + ggtitle('Normal Distribution - Moments') +
+  geom_line(data = data, aes(x = xs, y = first.moment, color = "first.moment"), alpha=0.4) +
+  geom_line(data = data, aes(x = xs, y = second.moment, color = "second.moment"), alpha=0.4) +
+  geom_line(data = data, aes(x = xs, y = third.moment, color = "third.moment"), alpha=0.4) +
+  geom_line(data = data, aes(x = xs, y = fourth.moment, color = "fourth.moment"), alpha=0.4) +
+  geom_line(data = data, aes(x = mu.xs, y = mu.ys, color = "mean - 0"), lty='dashed') +
+  xlab('Index Variable') +
+  ylab('Moment Functions') +
+  labs(colour='legend') +
+  theme_classic() +
+  theme(legend.position='left')
+  
+grid.arrange(p1, p2, ncol=1)
 ```
 
 
 
-![Normal](https://raw.githubusercontent.com/jtutmaher/jtutmaher.github.io/master/_screenshots/normal.png?raw=true)
+![Normal](https://raw.githubusercontent.com/jtutmaher/jtutmaher.github.io/master/_screenshots/normal_moments.png?raw=true)
 
-$$f_{pdf} = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{\frac{(x-\mu)^2}{2\sigma^2}}$$
+It's important to remember that normal distributions are parameterized by several factors, including the mean $\mu$ and the standard deviation $\sigma$. A more general extension of these parameters are *moments*, which are defined as:
 
-It's important to remember that normal distributions are parameterized by two factors, the mean $\mu$ and the standard deviation $\sigma$. Typically normal distributions have zero skewness and kurtosis; however, certain extensions of normal distributions, such as skew normal distributions, violate this behavior. These distributions are discussed more completely below. 
+$$ \mu_n = \int_{-\infty}^{\infty} (x-c)^n f(x) dx,$$
+
+where the moment is being computed relative to a reference point, c. This definition is generally correct for continuous PDFs, although there are exceptions. To define these in terms of the normal distribution plotted above (with $\mu=0$): **[3]**
+
+$$f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{\frac{(x-\mu)^2}{2\sigma^2}},$$
+
+- $$ \mu_0 = \int_{-\infty}^{\infty} f(x) dx,$$ (zeroth-moment, equals 1)
+- $$ \mu_1 = \int_{-\infty}^{\infty} x f(x) dx,$$ (first moment, mean)
+- $$ \mu_2 = \int_{-\infty}^{\infty} x^2f(x) dx,$$ (second moment, variance)
+- $$ \mu_3 = \int_{-\infty}^{\infty} x^3 f(x) dx,$$ (third moment, skew)
+- $$ \mu_4 = \int_{-\infty}^{\infty} x^4 f(x) dx,$$ (fourth moment, kurtosis)
+
+It is clear from the plots above, for zero-centered normal distributions, that the first and third moments will (mean, skew) will be zero since they are odd about the origin. If the distributions deviate from normality, then these moments will cease to be zero, which will be discussed in more detail below. 
+
+The equations are not standarized. Often, the moments are standardized by dividing each moment by factors of the varince to make them dimensionless.  Moreover, samples of the population - which do not represent the total population - have corrections applied to reflect the uncertainty in the moment due to low N. This is discussed more completely in the sections below. **[4]**
 
 ## Skew and Kurtosis
 
-Skewness quantifies the asymmetry of a distribution. It is often, but not always, the case that a right-skew distribution has a mean greater than the median, and a left-skew distribution has a mean less than the median. This statement can break down for multimodal or discrete distributions. Regardless, it is always the case that a unimodal distribution with zero skew has mean=median=mode. 
+Skewness quantifies the asymmetry of a distribution. In general, a right-skew distribution has a mean greater than the median, and a left-skew distribution has a mean less than the median. This statement can break down for multimodal or discrete distributions. 
 
-An important type of skew distribution is the skew normal distribution. 
+
 
 
 **[1]** [https://snow.dog/blog/data-augmentation-for-small-datasets](https://snow.dog/blog/data-augmentation-for-small-datasets)
 
 **[2]** [http://mathworld.wolfram.com/CentralLimitTheorem.html](http://mathworld.wolfram.com/CentralLimitTheorem.html)
+
+**[3]** [https://en.wikipedia.org/wiki/Moment_(mathematics)#Central_moments_in_metric_spaces](https://en.wikipedia.org/wiki/Moment_(mathematics)#Central_moments_in_metric_spaces)
+
+**[4]** [http://web.ipac.caltech.edu/staff/fmasci/home/astro_refs/SkewStatSignif.pdf](http://web.ipac.caltech.edu/staff/fmasci/home/astro_refs/SkewStatSignif.pdf)
+
