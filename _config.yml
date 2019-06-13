@@ -26,6 +26,10 @@ plugins:
   - jekyll-feed
   - jekyll-gist
   - jekyll-paginate
+  
+# Comment
+disqus:
+  shortname: jtutmaher
 
 # Sidebar link settings
 sidebar_home_link:  true
