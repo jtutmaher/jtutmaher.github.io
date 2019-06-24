@@ -84,15 +84,17 @@ The equations are not standarized. Often, the moments are standardized by dividi
 
 ## Skew and Kurtosis
 
-Skewness quantifies the asymmetry of a distribution. In general, a right-skew distribution has a mean greater than the median, and a left-skew distribution has a mean less than the median. This statement can break down for multimodal or discrete distributions, which is why it's a generalization. The figures below illustrate this behavior for a highly skewed normal distribution.
+Skewness quantifies the asymmetry of a distribution. A right skew distribution has a longer (positive) tail , and a left-skew distribution has a longer (negative) tail. The figures below illustrate this behavior for a highly skewed normal distribution.
 
 ![SkewNormal](https://raw.githubusercontent.com/jtutmaher/jtutmaher.github.io/master/_screenshots/skew_normal.png?raw=true)
 
 ![SkewNormalMoments](https://raw.githubusercontent.com/jtutmaher/jtutmaher.github.io/master/_screenshots/skew_normal_third_moment.png?raw=true)
 
+It isn't surprising that a metric evaluating asymmetry is defined by an asymmetric function ($x^3$). In this example, we've used the dsn function from R's sn pacakge, leveraging a skew-normal distribution. A skew-normal distribution is not a normal distribution, but rather a generalization of a normal distribution. It is predominantly parameterized by a skew parameter, alpha, and can be written as the combination of a normal PDF, $\phi(x)$, and a normal CDF, $\Phi(x)$:
 
+$$ f(x) = 2 \phi(x)\Phi(\alpha x).$$
 
-
+The standardized skewness of the figure above is 1.59, indicating a highly right skewed distribution. The third moment plot is particularly informative, as the area is entirely on the postitive end of the x-axis. In the case of a left skew normal distribution, the skewness would be strongly negative, with the function resembling a mirror image of the function above. 
 
 
 
