@@ -90,7 +90,7 @@ Skewness quantifies the asymmetry of a distribution. A right skew distribution h
 
 ![SkewNormalMoments](https://raw.githubusercontent.com/jtutmaher/jtutmaher.github.io/master/_screenshots/skew_normal_third_moment.png?raw=true)
 
-It isn't surprising that a metric evaluating asymmetry is defined by an asymmetric function ($x^3$). In this example, we've used the dsn function from R's sn pacakge, leveraging a skew-normal distribution. A skew-normal distribution is not a normal distribution, but rather a generalization of a normal distribution. It is predominantly parameterized by a skew parameter, alpha, and can be written as the combination of a normal PDF, $\phi(x)$, and a normal CDF, $\Phi(x)$:
+It isn't surprising that a metric evaluating asymmetry is defined by an asymmetric function ($x^3$). In this example, we've used the dsn function from R's sn pacakge, leveraging a skew-normal distribution. **[5]** A skew-normal distribution is not a normal distribution, but rather a generalization of a normal distribution. It is predominantly parameterized by a skew parameter, alpha, and can be written as the combination of a normal PDF, $\phi(x)$, and a normal CDF, $\Phi(x)$:
 
 $$ f(x) = 2 \phi(x)\Phi(\alpha x).$$
 
@@ -106,4 +106,6 @@ The standardized skewness of the figure above is 1.59, indicating a highly right
 **[3]** [https://en.wikipedia.org/wiki/Moment_(mathematics)#Central_moments_in_metric_spaces](https://en.wikipedia.org/wiki/Moment_(mathematics)#Central_moments_in_metric_spaces)
 
 **[4]** [http://web.ipac.caltech.edu/staff/fmasci/home/astro_refs/SkewStatSignif.pdf](http://web.ipac.caltech.edu/staff/fmasci/home/astro_refs/SkewStatSignif.pdf)
+
+**[5]** [https://cran.r-project.org/web/packages/sn/sn.pdf](https://cran.r-project.org/web/packages/sn/sn.pdf)
 
