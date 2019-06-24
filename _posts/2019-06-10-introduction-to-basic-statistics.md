@@ -84,7 +84,15 @@ The equations are not standarized. Often, the moments are standardized by dividi
 
 ## Skew and Kurtosis
 
-Skewness quantifies the asymmetry of a distribution. In general, a right-skew distribution has a mean greater than the median, and a left-skew distribution has a mean less than the median. This statement can break down for multimodal or discrete distributions. 
+Skewness quantifies the asymmetry of a distribution. In general, a right-skew distribution has a mean greater than the median, and a left-skew distribution has a mean less than the median. This statement can break down for multimodal or discrete distributions, which is why it's a generalization. The figures below illustrate this behavior for a highly skewed normal distribution.
+
+![SkewNormal](https://raw.githubusercontent.com/jtutmaher/jtutmaher.github.io/master/_screenshots/skew_normal.png?raw=true)
+
+![SkewNormalMoments](https://raw.githubusercontent.com/jtutmaher/jtutmaher.github.io/master/_screenshots/skew_normal_third_moment.png?raw=true)
+
+
+
+
 
 
 
