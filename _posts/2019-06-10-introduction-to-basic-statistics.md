@@ -86,7 +86,7 @@ Inspecting the moment plot above provides additional context for the kurtosis va
 
 The equations are not standarized. Often, the moments are standardized by dividing each moment by factors of the varince to make them dimensionless.  Moreover, samples of the population - which do not represent the total population - have corrections applied to reflect the uncertainty due to low sample count N. This is discussed more completely in the sections below. **[5]**
 
-#Skew and Kurtosis
+##Skew and Kurtosis
 
 Skewness quantifies the asymmetry of a distribution about the mean. A right skew distribution has a longer (positive) tail , and a left-skew distribution has a longer (negative) tail. The figures below illustrate this behavior for a skew-normal distribution. In the standardized case, the skewness $\mu_3$ is scaled by the variance, $\mu_2^{3/2}$, generating a defined skewness: **[6]**
 
@@ -110,7 +110,7 @@ where subtracting 3 accounts for the fact that a normal distribution has a kurto
 
 ![Kurtosis](https://raw.githubusercontent.com/jtutmaher/jtutmaher.github.io/master/_screenshots/kurtosis.png?raw=true)
 
-#The Linear Model
+##The Linear Model
 
 
 
