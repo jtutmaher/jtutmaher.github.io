@@ -4,6 +4,8 @@ layout: post
 
 title: Residual Analysis for Regression Models
 
+category: Machine Learning
+
 excerpt_separator:  <!--more-->
 
 comments: true
