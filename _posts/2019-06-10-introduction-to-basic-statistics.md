@@ -201,7 +201,7 @@ $$ N_{actual} = e^{\alpha t} + \epsilon.$$
 
 The noise, $\epsilon$, is normally distributed with zero mean and constant variance. The data, and model fits, are illustrated in the plot below:
 
-![ModelFits](/Users/jtutmahe/jtutmaher.github.io/_screenshots/model_fits.png)
+![ModelFits](https://raw.githubusercontent.com/jtutmaher/jtutmaher.github.io/master/_screenshots/model_fits.png?raw=true)
 
 1. **Fit 1**: A linear fit on the entire data set.
 2. **Fit 2**: A linear fit on the entire data set with an exponetially transformed input variable.
@@ -217,7 +217,7 @@ With respect to the second point, often a single (point) forecast is insufficien
 
 ### Residual Distributions and the Omnibus K2 Test
 
-![ModelFits](/Users/jtutmahe/jtutmaher.github.io/_screenshots/residual_distributions.png)
+![ModelFits](https://raw.githubusercontent.com/jtutmaher/jtutmaher.github.io/master/_screenshots/residual_distributions.png?raw=true)
 
 The residual profiles for fit 1 and fit 2 are illustrated above. Fit 1 has a long left tail, indicating a negative skew, which can be calculated as -0.9. It also has a higher ( *leptokurtic*) kurtosis value of 3.8, indicating a larger width relative to a normal distribution making the fit 2 residuals. Fit 2, on the other hand, has kurtosis and skew values similar to a normal distribution (0 skew and 3 kurtosis). 
 
