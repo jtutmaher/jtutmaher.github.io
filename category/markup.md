@@ -1,6 +1,6 @@
 ---
 layout: category
-title: Markup
+title: Physics
 ---
 
-Another sample category page.
+In progress....

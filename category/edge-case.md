@@ -3,25 +3,4 @@ layout: category
 title: Machine Learning
 ---
 
-Sample category page. You need to create a page for each category.
-The category is inferred from the title of the page, but you can also
-specify it with the `category` attribute in the front matter.
-
-```md
----
-layout: category
-title: My Category
----
-```
-
-Or ...
-
-```md
----
-layout: category
-title: Fancy Title
-category: My Category
----
-```
-
-Posts get listed below here.
+My thoughts on machine learning, deep learning, and statistics. Free for educational use, although most of the content has not been peer reviewed - so use at your own risk. Feel free to provide me with any feedback or thoughts. I have tried to cite my posts as best as possible. 
