@@ -106,7 +106,7 @@ The standardized skewness of the figure above is 1.59, indicating a highly right
 
 The kurtosis is illustrated in the plot below, with several kurtosis parameters being depicted. In the standardized case, the kurtosis $\mu_4$ is scaled by the variance, $\mu_2$, generating a defined *excess* kurtosis of:
 
-$$ \gamma_2 = \frac{\mu_4} {\mu_2} - 3,$$ 
+$$ \gamma_2 = \frac{\mu_4} {\mu_2^2} - 3,$$ 
 
 where subtracting 3 accounts for the fact that a normal distribution has a kurtosis of 3. In the event excess kurtosis is 0, the distribution is said to be *mesokurtic*. Thin-tailed distributions with negative excess kurtosis are said to be *platykurtic*, and thick-tailed distributions with positive excess kurtosis are said to be *leptokurtic*. Each kurtosis behavior is illustrated below. **[8]**  
 
@@ -223,17 +223,19 @@ With respect to the second point, often a single (point) forecast is insufficien
 
 The residual profiles for fit 1 and fit 2 are illustrated above. Fit 1 has a long left tail, indicating a negative skew, which can be calculated as -0.9. It also has a higher ( *leptokurtic*) kurtosis value of 3.8, indicating a larger width relative to a normal distribution making the fit 2 residuals. Fit 2, on the other hand, has kurtosis and skew values similar to a normal distribution (0 skew and 3 kurtosis). 
 
-Rather than compute both skew and kurtosis for the residual distribution manually, and then compare them manually, a single number can be used to quantify these values and assess normality. This number is a composite of the D'Agostino skewness transformation and the Anscombe & Glynn kurtosis transformation, known as an Omnibus K2 statistic **[10]**:
+Rather than compute both skew and kurtosis for the residual distribution manually, and then compare them manually, a single number can be used to quantify these values and assess normality. This number is a composite of the D'Agostino skewness transformation and the Anscombe & Glynn kurtosis transformation, known as an omnibus K2 statistic **[10]**:
 
 $$ Z_{dp} = Z_1^2(\gamma_1) + Z_2^2(\gamma_2).$$
 
-Here, both the kurtosis and skew values are corrected by the sample error in skewness and sample error in kurtosis, respectively, and additional transformations are applied to speep up convergence of the moments to a normal distribution in order to aid the test. The transformations are somewhat complicated, but can be defined as:
+Here, both the kurtosis and skew values are corrected by the sample error in skewness and sample error in kurtosis, respectively, and additional transformations are applied to speed up convergence of the moments to a normal distribution in order to aid the test. On there own, $Z_1$ and $Z_2$ roughly approximate normal distrbutions, and when combined in a manner reflecting the Euclidean norm the roughly approximate a Chi-squared distribution with two degrees of freedom. **[11]**
+
+The D'Agostino and Anscombe transformations are somewhat complicated, but can be defined as:
 
 $$Z_1(\gamma_1) = \delta \cdot asinh(\frac{\gamma_1}{\alpha \sqrt{\mu_2}}),$$
 
 $$Z_2(\gamma_2) = \sqrt{\frac{9A}{2}} [1 - \frac{2}{9A} - (\frac{1 - 2/A}{1 + \frac{\gamma_2 - \mu_1}{\sqrt{\mu_2}} \sqrt{2/(A-4)}})^{1/3}],$$
 
-where $\mu_1$ and $\mu_2$ in these equations do *not* stand for the moments of the sample distributions being analyzed, but rather the moments of the transformed distributions for the skew and kurtosis, respectively. The goal of the transformations is to better mimic a normal distribution for skew and kurtosis as N increases, thereby increasing the accuracy of the test. 
+where $\mu_1$ and $\mu_2$ in these equations do *not* stand for the moments of the sample distributions being analyzed, but rather the moments of the transformed distributions for the skew and kurtosis, respectively. The goal of the transformations is to better mimic a normal distribution for skew and kurtosis as N increases, thereby increasing the accuracy of the test. **[11]** D'Agostino notes that the omnibus test is preferred over the chi-squared or Kolmogorov tests due to their low power properties.
 
 As standard in hypothesis testing, the test statistics can be mapped to a p-value, which is then used to assess normality with respect to a confidence interval. If a 95 percent confidence interval is assumed, then fit 1 rejects normality with Anscombe-Glynn and D'Agostino p-values of $4e^{-6}$ and $2e^{-16}$, respectively. Fit 2 accepts the null hypothesis with p-values of 0.86 and 0.49, and therefore has evidence of normality. 
 
@@ -274,4 +276,6 @@ There are plenty of caveauts to applying a prediction inteval parametrized by a 
 **[9]** [https://academic.oup.com/biomet/article-abstract/96/4/761/220523](https://academic.oup.com/biomet/article-abstract/96/4/761/220523)
 
 **[10]** [https://en.wikipedia.org/wiki/D%27Agostino%27s_K-squared_test](https://en.wikipedia.org/wiki/D'Agostino's_K-squared_test)
+
+**[11]** [https://web.archive.org/web/20120325140006/http://www.cee.mtu.edu/~vgriffis/CE%205620%20materials/CE5620%20Reading/DAgostino%20et%20al%20-%20normaility%20tests.pdf](https://web.archive.org/web/20120325140006/http://www.cee.mtu.edu/~vgriffis/CE 5620 materials/CE5620 Reading/DAgostino et al - normaility tests.pdf)
 
