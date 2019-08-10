@@ -225,9 +225,9 @@ The residual profiles for fit 1 and fit 2 are illustrated above. Fit 1 has a lon
 
 Rather than compute both skew and kurtosis for the residual distribution manually, and then compare them manually, a single number can be used to quantify these values and assess normality. This number is a composite of the D'Agostino skewness transformation and the Anscombe & Glynn kurtosis transformation, known as an omnibus K2 statistic **[10]**:
 
-$$ Z_{dp} = Z_1^2(\gamma_1) + Z_2^2(\gamma_2).$$
+$$ Z_{k2} = Z_1^2(\gamma_1) + Z_2^2(\gamma_2).$$
 
-Here, both the kurtosis and skew values are corrected by the sample error in skewness and sample error in kurtosis, respectively, and additional transformations are applied to speed up convergence of the moments to a normal distribution in order to aid the test. On there own, $Z_1$ and $Z_2$ roughly approximate normal distrbutions, and when combined in a manner reflecting the Euclidean norm the roughly approximate a Chi-squared distribution with two degrees of freedom. **[11]**
+Here, additional transformations are applied to both kurtosis and skew to speed up convergence to a normal distribution with respect to N in order to aid the test. On their own, $Z_1$ and $Z_2$ roughly approximate normal distrbutions, and when combined in a manner reflecting a Euclidean norm roughly approximate a chi-squared distribution, with two degrees of freedom. **[11]**
 
 The D'Agostino and Anscombe transformations are somewhat complicated, but can be defined as:
 
@@ -235,15 +235,17 @@ $$Z_1(\gamma_1) = \delta \cdot asinh(\frac{\gamma_1}{\alpha \sqrt{\mu_2}}),$$
 
 $$Z_2(\gamma_2) = \sqrt{\frac{9A}{2}} [1 - \frac{2}{9A} - (\frac{1 - 2/A}{1 + \frac{\gamma_2 - \mu_1}{\sqrt{\mu_2}} \sqrt{2/(A-4)}})^{1/3}],$$
 
-where $\mu_1$ and $\mu_2$ in these equations do *not* stand for the moments of the sample distributions being analyzed, but rather the moments of the transformed distributions for the skew and kurtosis, respectively. The goal of the transformations is to better mimic a normal distribution for skew and kurtosis as N increases, thereby increasing the accuracy of the test. **[11]** D'Agostino notes that the omnibus test is preferred over the chi-squared or Kolmogorov tests due to their low power properties.
+where $\mu_1$ and $\mu_2$ in these equations do *not* stand for the moments of the sample distributions being analyzed, but rather the moments of the transformed distributions for the skew and kurtosis, respectively. D'Agostino notes that the omnibus test above is preferred over the chi-squared or Kolmogorov tests due to their low power properties. **[11]** 
 
 As standard in hypothesis testing, the test statistics can be mapped to a p-value, which is then used to assess normality with respect to a confidence interval. If a 95 percent confidence interval is assumed, then fit 1 rejects normality with Anscombe-Glynn and D'Agostino p-values of $4e^{-6}$ and $2e^{-16}$, respectively. Fit 2 accepts the null hypothesis with p-values of 0.86 and 0.49, and therefore has evidence of normality. 
 
 Since fit 2 has evidence of normality, there is legitimacy in applying a prediction interval based on a parametric t-distribution. In this case, the variance of the residuals is 20.5 cases, and the size of the training set is over 1200 time steps, resulting in a 95% prediction interval of: 
 
-$$ f_{density} = f_{mean} \pm 1.96\sigma_r \sqrt{1 + \frac{1}{N}} \rightarrow f_{mean} \pm 1.96\sigma_r,$$
+$$ f_{density} = f_{mean} \pm 1.96\sigma_r \sqrt{1 + \frac{1}{N}},$$
 
-where the right hand side approximates the prediction interval in the limit of large N. The 1.96 factor represents the number of standard deviations away from the mean the 95% confidence interval lies. In this case, for timestep 6.1, the final forecast prediction interval would be:
+$$f_{density} =  f_{mean} \pm 1.96\sigma_r,$$
+
+where the bottom equation approximates the prediction interval in the limit of large N. The 1.96 factor represents the number of standard deviations away from the mean the 95% confidence interval lies. In this case, for timestep 6.1, the final forecast prediction would be:
 
 $$f(6.1) = 445 \pm 40$$ cases,
 
@@ -251,7 +253,11 @@ with a 95% confidence interval.
 
 ## Additional Considerations
 
-There are plenty of caveauts to applying a prediction inteval parametrized by a normal distribution - and quantifying the normality of the residuals is not a proxy for check for autocorrelation or heterodiscity. Fit 2 was ultimately successful because the data's trend was adjusted, which effectively eliminated these effects in the residuals. Seasonality and trend adjustments are often a prerequesite for linear forecasting. If these features are not removed from the data, then the fit will be suboptimal, and the failure can (typically) be seen in the residuals. To illustrate this point, the fit 1 is illustrated further below. 
+There are plenty of caveauts to applying a prediction inteval parametrized by a normal distribution - and quantifying the normality of the residuals is not a proxy check for autocorrelation or heterodiscity. Fit 2 was ultimately successful because the data's trend was adjusted, which effectively eliminated these effects in the residuals. Seasonality and trend adjustments are often a prerequesite for linear forecasting. If these features are not removed from the data, then the fit will be suboptimal, and the remaining information can (typically) be seen in the residuals. To illustrate this point, the fit 1 is illustrated further below. 
+
+![ModelFits](https://raw.githubusercontent.com/jtutmaher/jtutmaher.github.io/master/_screenshots/residual_plots_fit1.png?raw=true)
+
+
 
 ## Non-normal Residual Distributions and Bootstrapping
 
