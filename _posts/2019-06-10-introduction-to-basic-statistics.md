@@ -179,7 +179,7 @@ where $\beta$ is a vector of coefficients and X is a matrix of independent varia
 
 [^bignote]: For example, in physics, it is known that force is proportional to mass via the object's acceleration ($F=ma$). However, if one measures an object's force at various accelerations, the resulting output will *not* be perfectly linearly (although it should be very close). This is due to random error, such as fluctuations in air pressure or friction, which are ultimately difficult to control and quantify.
 
-The model's residuals - or the difference between predictions and actuals within the *training set* - should have the following properties, as stated by Robert Hyndman in Chapter 3 of Introduction to Forecasting **[10]**: 
+The model's residuals - or the difference between predictions and actuals within the *training set* - should have the following properties, as stated by Robert Hyndman in Chapter 3 of Introduction to Forecasting **[12]**: 
 
 > 1. The residuals are uncorrelated. If there are correlations between the residuals, then there is information left in the residuals which should be used in computing forecasts.
 > 2. The residuals have zero mean. If the residuals have a mean other than zero, then the forecasts are biased.
@@ -223,7 +223,7 @@ With respect to the second point, often a single (point) forecast is insufficien
 
 The residual profiles for fit 1 and fit 2 are illustrated above. Fit 1 has a long left tail, indicating a negative skew, which can be calculated as -0.9. It also has a higher ( *leptokurtic*) kurtosis value of 3.8, indicating a larger width relative to a normal distribution making the fit 2 residuals. Fit 2, on the other hand, has kurtosis and skew values similar to a normal distribution (0 skew and 3 kurtosis). 
 
-Rather than compute both skew and kurtosis for the residual distribution manually, and then compare them manually, a single number can be used to quantify these values and assess normality. This number is a composite of the D'Agostino skewness transformation and the Anscombe & Glynn kurtosis transformation, known as an omnibus K2 statistic **[10]**:
+Rather than compute both skew and kurtosis for the residual distribution manually, and then compare them manually, a single number can be used to quantify these values and assess normality. This number is a composite of the D'Agostino skewness transformation and the Anscombe & Glynn kurtosis transformation, known as an omnibus statistic **[10]**:
 
 $$ Z_{k2} = Z_1^2(\gamma_1) + Z_2^2(\gamma_2).$$
 
@@ -249,19 +249,47 @@ where the bottom equation approximates the prediction interval in the limit of l
 
 $$f(6.1) = 445 \pm 40$$ cases,
 
-with a 95% confidence interval.
+within a 95% confidence interval.
 
 ## Additional Considerations
 
-There are plenty of caveauts to applying a prediction inteval parametrized by a normal distribution - and quantifying the normality of the residuals is not a proxy check for autocorrelation or heterodiscity. Fit 2 was ultimately successful because the data's trend was adjusted, which effectively eliminated these effects in the residuals. Seasonality and trend adjustments are often a prerequesite for linear forecasting. If these features are not removed from the data, then the fit will be suboptimal, and the remaining information can (typically) be seen in the residuals. To illustrate this point, the fit 1 is illustrated further below. 
+The example discussed above is actually a time-varying process, and there are plenty of caveauts to applying a prediction inteval parametrized by a normal distribution - as testing normality of the residuals is not a proxy check for autocorrelation or heteroscadiscity. Fit 2 was ultimately successful because the data's trend was adjusted, and thereby stationary, which effectively eliminated trend effects in the residuals. Seasonality and trend adjustments are often required for linear time-series forecasting. If the features are not removed from the data, then the fit will be suboptimal, and the remaining information is typically evident in the residuals themselves. To illustrate this point, the fit 1 is shown below. 
 
-![ModelFits](https://raw.githubusercontent.com/jtutmaher/jtutmaher.github.io/master/_screenshots/residual_plots_fit1.png?raw=true)
+![ModelFits](https://raw.githubusercontent.com/jtutmaher/jtutmaher.github.io/master/_screenshots/residual_plots_fit1.png?)
+
+The plots were generated using the checkresidual() function in the R forecast package. The three plots above include a residual plot, a residual distribution plot, and an autocorrelation function (ACF) plot. The first two plots are fairly self-explanatory, with the first plot illustrating the residual values at various timesteps in the training data, and the second plot illustrating a generic histogram of the residuals. 
+
+In timeseries forecast, ACF can be defined as:
+
+$$ r_k = \frac{\sum_{t=k+1}^T (y_t - \bar{y})(y_{t-k} - \bar{y})}{\sum_{t=1}^T (y_t - \bar{y})^2}.$$ **[12]**
 
 
 
-## Non-normal Residual Distributions and Bootstrapping
+This can be expressed in matrix notation by thinking of each term in the time varying signal as an element in a vector. 
+
+$$ \vec{y} = (y_1, y_2, …, y_T), $$
+
+$$\vec{y}' = (\vec{y} - \mu) / \sigma.$$
+
+Where the second expression standardizes the signal by its mean and standard deviation. A matrix (similar to a Pearson correlation matrix) can be constructed by taking the outer product of the standardized signal vector with itself:
+
+$$ \mathbf{R} = \vec{y}'^T \vec{y}'.$$
 
 
+
+$$\mathbf{R} =  \begin{pmatrix} y_1'y_1' & y_1'y_2' & … & y_1'y_T' \\ y_2'y_1' & y_2'y_2' & …. \\ y_3'y_1' & y_3'y_2' & y_3'y_3' \\ . \\ y_T'y_1' & y_T'y_2' & ... & y_T'y_T' \end{pmatrix}$$
+
+
+
+The $r_k$ coefficient above can be computed be summing the elements *along diagonal cuts* of the matrix, where the lag, k, represents how far off the diagonal to shift each cut.  Similar to Pearson correlation, the normalized ACF values fall between -1 (perfect anti-correlation) and 1 (perfect correlation). In the case of white noise, the off-diagonal elements are zero, and diagonal elements are 1.
+
+It should be noted that the Pearson correlation matrix is typically more complicated than the standardized autocovariance matrix defined above. Specifically, the Pearson correlation matrix in machine learning is often computed by taking the product of a feature vector $n_{features} \times n_{samples}$ with its transpose - making the starting point a matrix - not a vector - although the ending point for both is ultimately a matrix. As such, each element in a Pearson correlation matrix typically represents the inner product of two random variables with N samples, and the Pearson correlation coefficient is just an element in the matrix. Looking at the autocovariance matrix defined above, each element is the standardized autocovariance of a time-varying signal *at a specific point in time*, multiplied by iself at various points in time - so basically two scalars, not two vectors. This makes each element in the standardized autocovariance matrix somewhat simpler, and explains why a diagonal sum is required in the first place to compute the ACF.  
+
+As illustrated in the ACF plot, the coefficients decay with increasing lag. This indicates a trend in the signal should be removed before applying a linear fit - possibly via a polynomial or exponential transform. 
+
+## Conclusion
+
+The residuals in fit1 failed our normality tests. Had a normal prediction interval been applied, the future values would have exceeded the P90 values within a few timesteps. This would have put any activities based on this forecast at risk, such as order or transportation of medical supplies. This is why its important to evaluate and understand models in several different ways. 
 
 **[1]** [https://snow.dog/blog/data-augmentation-for-small-datasets](https://snow.dog/blog/data-augmentation-for-small-datasets)
 
@@ -284,4 +312,6 @@ There are plenty of caveauts to applying a prediction inteval parametrized by a 
 **[10]** [https://en.wikipedia.org/wiki/D%27Agostino%27s_K-squared_test](https://en.wikipedia.org/wiki/D'Agostino's_K-squared_test)
 
 **[11]** [https://web.archive.org/web/20120325140006/http://www.cee.mtu.edu/~vgriffis/CE%205620%20materials/CE5620%20Reading/DAgostino%20et%20al%20-%20normaility%20tests.pdf](https://web.archive.org/web/20120325140006/http://www.cee.mtu.edu/~vgriffis/CE 5620 materials/CE5620 Reading/DAgostino et al - normaility tests.pdf)
+
+**[12]** [https://otexts.com/fpp2/autocorrelation.html](https://otexts.com/fpp2/autocorrelation.html)
 
