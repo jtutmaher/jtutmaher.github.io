@@ -66,7 +66,7 @@ $$
 $$
 which reduces to $p-1$ when $N=p$ is prime.
 
-There are two important facts to point out about $\phi(N)$ and $\mathbb{Z}_N^\*$. First, $\phi(N)$ can be computed given the factorization of $N$, and in the case of RSA this can be exploited to break the encryption scheme. Second, for a general group $G$, where the order of $|G|$ is prime, there are $|G|-1$ generators. Moreover, if N is a *safe prime*, so $N = 2q + 1$ where $q$ is prime, then approximately $1/2$ of the elements in the group are generators. It goes without saying that both groups are cyclic in this case. This fact is discussed later when constructing efficient algorithms for finding generators.
+There are two important facts to point out about $\phi(N)$ and $\mathbb{Z}_N^\*$. First, $\phi(N)$ can be computed given the factorization of $N$, and in the case of RSA this can be exploited to break the encryption scheme. Second, for a general group $G$, where the order of $\|G\|$ is prime, there are $\|G\|-1$ generators. Moreover, if N is a *safe prime*, so $N = 2q + 1$ where $q$ is prime, then approximately $1/2$ of the elements in the group are generators. It goes without saying that both groups are cyclic in this case. This fact is discussed later when constructing efficient algorithms for finding generators.
 
 A few final important theorems to note in the study of cryptography.
 
@@ -120,7 +120,7 @@ In order to understand this definition, it is instructive to review the time-com
 
 ![TimeComplexities](https://raw.githubusercontent.com/jtutmaher/jtutmaher.github.io/master/_screenshots/basic_complexities.png?raw=true)
 
-The algorithms above describe the basic mathematical operations in cryptography. $|N|$ stands for the bitwise length of N rather than the actual value, N. The most costly operation is the $MOD-EXP$ function, which takes order-3 running time. Efficient cryptographic schemes, including RSA seek, to keep the $MOD-EXP$ operations to a minimum. It's important to note that the algorithms required to encrypt and decrypt a message are very efficient, given the corresponding parameters; however, **the algorithms required to break the encryption are very inefficient, aiding to the security of the scheme.**
+The algorithms above describe the basic mathematical operations in cryptography. $\|N\|$ stands for the bitwise length of N rather than the actual value, N. The most costly operation is the $MOD-EXP$ function, which takes order-3 running time. Efficient cryptographic schemes, including RSA seek, to keep the $MOD-EXP$ operations to a minimum. It's important to note that the algorithms required to encrypt and decrypt a message are very efficient, given the corresponding parameters; however, **the algorithms required to break the encryption are very inefficient, aiding to the security of the scheme.**
 
 #### Discrete Logarithm
 
